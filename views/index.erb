@@ -1,0 +1,35 @@
+<h1>Distance Calculator</h1>
+<form action="/" method="post">
+  <div class="form-group">
+    <label for="current_progress">Current Progress (miles):</label>
+    <input type="number" id="current_progress" name="current_progress" step="any" value="<%= @current_progress || '' %>" required autocomplete="off">
+  </div>
+  <div class="form-group">
+    <label for="daily_pace">Daily Pace (km or miles):</label>
+    <input type="number" id="daily_pace" name="daily_pace" step="any" value="<%= @daily_pace || 10 %>" required autocomplete="off">
+  </div>
+  <div class="form-group">
+    <div class="radio-group">
+    <label>Units:</label>
+      <div>
+        <input type="radio" id="km" name="units" value="km" <%= (@units == 'miles') ? "" : "checked" %>>
+        <label for="km">Kilometers</label>
+      </div>
+      <div>
+        <input type="radio" id="miles" name="units" value="miles" <%= (@units == 'miles') ? "checked" : "" %>>
+        <label for="miles">Miles</label>
+      </div>
+    </div>
+  </div>
+  <button type="submit">Calculate</button>
+</form>
+
+<% if @miles_left %>
+  <h1>Calculation Results</h1>
+  <div class="results">
+    <p>Miles left: <%= @miles_left %></p>
+    <p>Kilometers left: <%= @km_left %></p>
+    <p>Days left: <%= @days_left %></p>
+    <p>Estimated Completion Date: <%= @completion_date.strftime("%B %d") %></p>
+  </div>
+<% end %>
