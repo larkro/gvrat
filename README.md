@@ -13,3 +13,9 @@ Built with Ruby 3.3.1
 As a sinatrarb app.
 
 Makefile contains info about things used.
+
+## Deployment
+
+It's running on render.com
+
+[GVRAT om render.com](https://gvrat.onrender.com)
