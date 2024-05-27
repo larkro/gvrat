@@ -21,10 +21,14 @@ GEM
 
 PLATFORMS
   x86_64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   puma (~> 6.4)
   sinatra
+
+RUBY VERSION
+   ruby 3.3.1p55
 
 BUNDLED WITH
    2.4.22
