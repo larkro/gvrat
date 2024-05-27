@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: gvrat.mccc.se
+    runtime: ruby
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "rackup -p $PORT"
