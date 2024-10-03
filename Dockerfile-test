@@ -1,0 +1,29 @@
+FROM alpine:latest as builder
+
+RUN apk --no-cache add bash
+
+SHELL ["/bin/bash", "-c"]
+
+RUN apk --no-cache add \
+  ruby 
+
+RUN useradd -ms /bin/bash appuser
+
+COPY gemrc /root/.gemrc
+
+# It tries to install ruby bundler with failback to apk version and nokoiri
+RUN <<EOF
+gem install bundler
+gem cleanup
+rm -rf /usr/lib/ruby/gems/*/cache/*
+EOF
+
+FROM builder
+
+WORKDIR /app
+COPY Gemfile app.rb views /app/
+RUN bundle install --without development test
+
+EXPOSE 4567
+
+CMD ["bundle", "exec", "rackup", "--host", "0.0.0.0", "-p", "4567"]
