@@ -36,6 +36,10 @@ get "/" do
   erb :index
 end
 
+get "/up" do
+  status 200
+end
+
 post "/" do
   @current_progress = params[:current_progress].to_f
   @daily_pace = params[:daily_pace].to_f
