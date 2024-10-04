@@ -2,12 +2,12 @@
 service: gvrat
 
 # Name of the container image.
-image: ttl.sh/gvrat:1h
+image: gvrat
 
 # Deploy to these servers.
 servers:
   web:
-    - iris.mccc.se
+    - kamal.mccc.se
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -17,14 +17,15 @@ servers:
 # Set ssl: false if using something like Cloudflare to terminate SSL (but keep host!).
 proxy:
   ssl: true
-  host: app.example.com
+  host: gvrat.mccc.se
   # kamal-proxy connects to your container over port 80, use `app_port` to specify a different port.
-  # app_port: 3000
+  app_port: 4567
 
 # Credentials for your image host.
 registry:
   # Specify the registry server, if you're not using Docker Hub
   # server: registry.digitalocean.com / ghcr.io / ...
+  server: ttl.sh
   username: my-user
 
   # Always use an access token rather than real password (pulled from .kamal/secrets).
@@ -33,7 +34,7 @@ registry:
 
 # Configure builder setup.
 builder:
-  arch: amd64
+  arch: x86_64
 
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
 #
@@ -53,8 +54,6 @@ builder:
 #
 # ssh:
 #   user: app
-ssh:
-  user: lakr
 
 # Use a persistent storage volume.
 #
