@@ -8,7 +8,7 @@ so that I can keep walking.
 
 ## Ruby / Sinatra
 
-Built with Ruby 3.3.1
+Built with Ruby 3.3.5
 
 As a sinatrarb app.
 
@@ -16,6 +16,7 @@ Makefile contains info about things used.
 
 ## Deployment
 
-It's running on render.com
+It's running on a small VPS,
+deployed using kamal.
 
-[GVRAT om render.com](https://gvrat.onrender.com)
+[GVRAT calc](https://gvrat.mccc.se)
