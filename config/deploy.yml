@@ -39,9 +39,9 @@ builder:
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
 #
 env:
-  clear:
-    GIT_HASH: GIT_HASH
-#   secret:
+#   clear:
+  secret:
+    - GIT_HASH: GIT_HASH
 #     - RAILS_MASTER_KEY
 
 # Aliases are triggered with "bin/kamal <alias>". You can overwrite arguments on invocation:
