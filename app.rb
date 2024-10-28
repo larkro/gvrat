@@ -40,6 +40,26 @@ get "/up" do
   status 200
 end
 
+get "/env" do
+  # Define the env vars you want to display
+  env_vars = {
+    "GIT_HASH" => ENV["GIT_HASH"],
+    "GIT_TAGS" => ENV["GIT_TAGS"],
+    "APP_VERSION" => ENV["APP_VERSION"],
+    "RAILS_ENV" => ENV["RAILS_ENV"]
+  }
+
+  html = <<~HTML
+    <h1>Environment Variables</h1>
+    <ul>
+      #{env_vars.filter_map { |key, value| "<li><strong>#{key}:</strong> #{value}</li>" if value }.join}
+    </ul>
+  HTML
+
+  status 200
+  body html
+end
+
 post "/" do
   @current_progress = params[:current_progress].to_f
   @daily_pace = params[:daily_pace].to_f
