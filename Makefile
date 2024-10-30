@@ -12,7 +12,7 @@ docker:	## Build docker image
 	docker build -t mccc/gvrat .
 
 erblint:	## Lint erb/html, erblint views/*
-	erblint views/*
+	erb_lint views/*
 
 standardrb: ## Lint ruby code, standardrb app.rb 
 	standardrb app.rb
