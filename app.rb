@@ -51,13 +51,13 @@ get "/env" do
 
   html = <<~HTML
     <h1>Environment Variables</h1>
-    <ul>
+    <pre>
       #{env_vars.filter_map { |key, value| "<li><strong>#{key}:</strong> #{value}</li>" if value }.join}
-    </ul>
+    </pre>
   HTML
 
   status 200
-  body html
+  erb html
 end
 
 post "/" do
