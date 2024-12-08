@@ -51,9 +51,11 @@ get "/env" do
 
   html = <<~HTML
     <h1>Environment Variables</h1>
-    <pre>
-      #{env_vars.filter_map { |key, value| "<li><strong>#{key}:</strong> #{value}</li>" if value }.join}
-    </pre>
+    <div>
+      <ul>
+        #{env_vars.filter_map { |key, value| "<li><strong>#{key}:</strong> #{value}</li>" if value }.join}
+      </ul>
+    </div>
   HTML
 
   status 200
