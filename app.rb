@@ -1,5 +1,10 @@
 require "sinatra"
 require "date"
+require "rack/protection"
+
+set :protection, except: :host
+
+use Rack::Protection::HostAuthorization, hosts: ["gvrat.mccc.se", "localhost", "127.0.0.1"]
 
 # Calculates distances and estimated completion dates based on given input.
 class DistanceCalculator
@@ -51,9 +56,9 @@ get "/env" do
 
   html = <<~HTML
     <h1>Environment Variables</h1>
-    <pre>
+    <div>
       #{env_vars.filter_map { |key, value| "<li><strong>#{key}:</strong> #{value}</li>" if value }.join}
-    </pre>
+    </div>
   HTML
 
   status 200
