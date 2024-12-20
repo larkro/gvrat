@@ -1,7 +1,7 @@
-require "sinatra"
+require "sinatra/base"
 require "date"
 
-# Calculates distances and estimated completion dates based on given input.
+# DistanceCalculator class
 class DistanceCalculator
   AVERAGE_DAILY_DISTANCE = 10
   TOTAL_DISTANCE = 672
@@ -31,50 +31,60 @@ class DistanceCalculator
   end
 end
 
-# Sinatra app
-get "/" do
-  erb :index
-end
+# Modular Sinatra app
+class App < Sinatra::Base
+  configure do
+    set :host_authorization, {permitted_hosts: []}
+    set :bind, "0.0.0.0"
+  end
 
-get "/up" do
-  status 200
-end
+  get "/" do
+    erb :index
+  end
 
-get "/env" do
-  # Define the env vars you want to display
-  env_vars = {
-    "GIT_HASH" => ENV["GIT_HASH"],
-    "GIT_TAGS" => ENV["GIT_TAGS"],
-    "APP_VERSION" => ENV["APP_VERSION"],
-    "RAILS_ENV" => ENV["RAILS_ENV"]
-  }
+  get "/up" do
+    status 200
+  end
 
-  html = <<~HTML
-    <h1>Environment Variables</h1>
-    <pre>
-      #{env_vars.filter_map { |key, value| "<li><strong>#{key}:</strong> #{value}</li>" if value }.join}
-    </pre>
-  HTML
+  get "/env" do
+    # Define the env vars you want to display
+    env_vars = {
+      "GIT_HASH" => ENV["GIT_HASH"],
+      "GIT_TAGS" => ENV["GIT_TAGS"],
+      "APP_VERSION" => ENV["APP_VERSION"],
+      "RAILS_ENV" => ENV["RAILS_ENV"]
+    }
 
-  status 200
-  erb html
-end
+    html = <<~HTML
+      <h1>Environment Variables</h1>
+      <ul>
+        #{env_vars.filter_map { |key, value| "<li><strong>#{key}:</strong> #{value}</li>" if value }.join}
+      </ul>
+    HTML
 
-post "/" do
-  @current_progress = params[:current_progress].to_f
-  @daily_pace = params[:daily_pace].to_f
-  @units = params[:units]
+    status 200
+    erb html
+  end
 
-  distance_calculator = DistanceCalculator.new(
-    current_progress: @current_progress,
-    daily_pace: @daily_pace,
-    units: @units
-  )
+  post "/" do
+    @current_progress = params[:current_progress].to_f
+    @daily_pace = params[:daily_pace].to_f
+    @units = params[:units]
 
-  @miles_left = distance_calculator.miles_left
-  @km_left = distance_calculator.km_left
-  @days_left = distance_calculator.days_left
-  @completion_date = distance_calculator.completion_date
+    distance_calculator = DistanceCalculator.new(
+      current_progress: @current_progress,
+      daily_pace: @daily_pace,
+      units: @units
+    )
 
-  erb :index
+    @miles_left = distance_calculator.miles_left
+    @km_left = distance_calculator.km_left
+    @days_left = distance_calculator.days_left
+    @completion_date = distance_calculator.completion_date
+
+    erb :index
+  end
+
+  # Start the application if run directly
+  run! if app_file == $PROGRAM_NAME
 end
