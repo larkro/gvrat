@@ -1,0 +1,17 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/ruby:latest",
+  "name": "Ruby",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+      },
+      "extensions": [
+        "shopify.ruby-lsp"
+      ]
+    }
+  },
+  "waitFor": "onCreateCommand",
+  "updateContentCommand": "bundle install",
+  "postStartCommand": "ruby app.rb"
+}
