@@ -48,6 +48,7 @@ class App < Sinatra::Base
 
   get "/up" do
     status 200
+    body "OK"
   end
 
   get "/env" do
