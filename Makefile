@@ -1,5 +1,5 @@
 app:	## Run the sinatra app
-	rackup
+	APP_VERSION="development" ruby ./app.rb
 
 reek:   ## Reek gvrat_parser
 	reek app.rb
