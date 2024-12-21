@@ -42,6 +42,10 @@ class App < Sinatra::Base
     erb :index
   end
 
+  not_found do
+    redirect to("/")
+  end
+
   get "/up" do
     status 200
   end

@@ -126,14 +126,10 @@ PLATFORMS
 
 DEPENDENCIES
   erb_lint
-  puma (~> 6.4)
-  rack-protection (~> 4.1)
-  rackup (~> 2.1)
+  puma
+  rackup
   rubocop
   sinatra
-
-RUBY VERSION
-   ruby 3.3.6p108
 
 BUNDLED WITH
    2.5.22
