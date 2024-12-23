@@ -46,6 +46,10 @@ class App < Sinatra::Base
     redirect to("/")
   end
 
+  not_found do
+    redirect to("/")
+  end
+
   get "/up" do
     status 200
     body "OK"
@@ -91,5 +95,5 @@ class App < Sinatra::Base
   end
 
   # Start the application if run directly
-  run! if app_file == $PROGRAM_NAME
+  run! if app_file == $0
 end
