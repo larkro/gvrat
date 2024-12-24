@@ -46,7 +46,7 @@ class App < Sinatra::Base
     redirect to("/")
   end
 
-  get "/healthz" do
+  get "/up" do
     status 200
     body "OK"
   end
