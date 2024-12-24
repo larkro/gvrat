@@ -37,7 +37,7 @@ registry:
 builder:
   arch: x86_64
   context: .
-  remote: ssh://root@kamal.mccc.se
+  # remote: ssh://root@kamal.mccc.se
 
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
 #
