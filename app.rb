@@ -32,7 +32,7 @@ class DistanceCalculator
 end
 
 # Modular Sinatra app
-class App < Sinatra::Base
+class Gvrat < Sinatra::Base
   configure do
     set :host_authorization, {permitted_hosts: []}
     set :bind, "0.0.0.0"
@@ -40,10 +40,6 @@ class App < Sinatra::Base
 
   get "/" do
     erb :index
-  end
-
-  not_found do
-    redirect to("/")
   end
 
   get "/up" do
@@ -90,6 +86,10 @@ class App < Sinatra::Base
     erb :index
   end
 
+  not_found do
+    redirect to("/")
+  end
+
   # Start the application if run directly
-  run! if app_file == $PROGRAM_NAME
+  run! if app_file == $0
 end

@@ -20,7 +20,6 @@ proxy:
   host: gvrat.mccc.se
   # kamal-proxy connects to your container over port 80, use `app_port` to specify a different port.
   app_port: 4567
-  forward_headers: true
 
 # Credentials for your image host.
 registry:
@@ -36,6 +35,8 @@ registry:
 # Configure builder setup.
 builder:
   arch: x86_64
+  context: .
+  # remote: ssh://root@kamal.mccc.se
 
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
 #
@@ -43,7 +44,8 @@ env:
 #   clear:
   secret:
     - GIT_HASH
-#     - RAILS_MASTER_KEY
+  clear:
+    RACK_ENV: <%= ENV["RACK_ENV"] || "production" %>
 
 # Aliases are triggered with "bin/kamal <alias>". You can overwrite arguments on invocation:
 # "bin/kamal logs -r job" will tail logs from the first server in the job section.
