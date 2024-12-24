@@ -32,7 +32,7 @@ class DistanceCalculator
 end
 
 # Modular Sinatra app
-class App < Sinatra::Base
+class Gvrat < Sinatra::Base
   configure do
     set :host_authorization, {permitted_hosts: []}
     set :bind, "0.0.0.0"
