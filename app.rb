@@ -6,9 +6,9 @@ class DistanceCalculator
   AVERAGE_DAILY_DISTANCE = 10
   TOTAL_DISTANCE = 672
 
-  def initialize(current_progress:, daily_pace: nil, units:)
+  def initialize(current_progress:, units:, daily_pace: nil)
     @current_progress = current_progress.to_f
-    daily_pace = daily_pace&.to_f
+    daily_pace&.to_f
     @units = units
   end
 
@@ -22,7 +22,7 @@ class DistanceCalculator
 
   def days_left
     distance_left = (@units == "miles") ? miles_left : km_left
-    daily_pace = daily_pace || AVERAGE_DAILY_DISTANCE
+    daily_pace ||= AVERAGE_DAILY_DISTANCE
     distance_left / daily_pace
   end
 
