@@ -6,10 +6,10 @@ class DistanceCalculator
   AVERAGE_DAILY_DISTANCE = 10
   TOTAL_DISTANCE = 672
 
-  def initialize(args)
-    @current_progress = args[:current_progress].to_f
-    @daily_pace = args[:daily_pace]&.to_f
-    @units = args[:units]
+  def initialize(current_progress:, daily_pace: nil, units:)
+    @current_progress = current_progress.to_f
+    daily_pace = daily_pace&.to_f
+    @units = units
   end
 
   def miles_left
@@ -22,7 +22,7 @@ class DistanceCalculator
 
   def days_left
     distance_left = (@units == "miles") ? miles_left : km_left
-    daily_pace = @daily_pace || AVERAGE_DAILY_DISTANCE
+    daily_pace = daily_pace || AVERAGE_DAILY_DISTANCE
     distance_left / daily_pace
   end
 
@@ -68,14 +68,14 @@ class Gvrat < Sinatra::Base
   end
 
   post "/" do
-    @current_progress = params[:current_progress].to_f
-    @daily_pace = params[:daily_pace].to_f
-    @units = params[:units]
+    current_progress = params[:current_progress].to_f
+    daily_pace = params[:daily_pace].to_f
+    units = params[:units]
 
     distance_calculator = DistanceCalculator.new(
-      current_progress: @current_progress,
-      daily_pace: @daily_pace,
-      units: @units
+      current_progress: current_progress,
+      daily_pace: daily_pace,
+      units: units
     )
 
     @miles_left = distance_calculator.miles_left
