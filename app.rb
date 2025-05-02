@@ -4,7 +4,7 @@ require "date"
 # DistanceCalculator class
 class DistanceCalculator
   AVERAGE_DAILY_DISTANCE = 10
-  TOTAL_DISTANCE = 672
+  TOTAL_DISTANCE = 678
 
   def initialize(current_progress:, units:, daily_pace: nil)
     @current_progress = current_progress.to_f
