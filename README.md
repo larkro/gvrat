@@ -8,7 +8,7 @@ so that I can keep walking.
 
 ## Ruby / Sinatra
 
-Built with Ruby 3.4.1
+Built with Ruby 3.4
 
 As a sinatrarb app.
 
